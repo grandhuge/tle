@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>บทเรียนคอมพิวเตอร์ช่วยสอน - กิจกรรมออมทรัพย์</title>
+    <link rel="stylesheet" href="css/style.css"> <!-- CSS หลัก -->
+    <link rel="stylesheet" href="css/saving.css"> <!-- CSS เฉพาะหน้า -->
+</head>
+<body>
+    <audio autoplay loop volume="0.5">
+        <source src="./sound/music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <div class="container">
+        <header>
+            <h1>กิจกรรมออมทรัพย์</h1>
+            <p>บทเรียนคอมพิวเตอร์ช่วยสอนสำหรับนักเรียนชั้นประถมศึกษา</p>
+            <div class="mascot">
+                <img src="./img/mascot.png" alt="มาสคอตสหกรณ์" />
+            </div>
+        </header>
+
+        <nav class="breadcrumb animated-element">
+            <a href="index.html">หน้าแรก</a> &gt; กิจกรรมออมทรัพย์
+        </nav>
+
+        <!-- ส่วนเครื่องมือควบคุม -->
+        <div class="control-panel animated-element">
+            <button id="prevBtn" class="nav-btn" disabled><i class="arrow-left"></i> ย้อนกลับ</button>
+            <div class="progress-container">
+                <div class="progress-bar" id="lessonProgress"></div>
+            </div>
+            <button id="nextBtn" class="nav-btn">ถัดไป <i class="arrow-right"></i></button>
+        </div>
+
+        <!-- ส่วนเนื้อหาบทเรียน -->
+        <div class="lesson-container animated-element">
+            <div class="lesson-slides">
+                <!-- สไลด์ที่ 1: บทนำ -->
+                <div class="slide active" id="slide1">
+                    <div class="slide-content">
+                        <h2>การออมทรัพย์คืออะไร?</h2>
+                        <div class="media-container">
+                            <img src="/api/placeholder/600/350" alt="ภาพประกอบการออมทรัพย์" class="lesson-image">
+                            <div class="audio-player">
+                                <button class="play-btn" data-audio="audio1"><i class="play-icon"></i> ฟังคำอธิบาย</button>
+                                <audio id="audio1" class="narration">
+                                    <source src="#" type="audio/mpeg">
+                                    เบราว์เซอร์ของคุณไม่รองรับการเล่นเสียง
+                                </audio>
+                            </div>
+                        </div>
+                        <div class="lesson-text">
+                            <p>การออมทรัพย์คือการเก็บเงินส่วนหนึ่งไว้ ไม่นำไปใช้จ่ายในทันที เพื่อเก็บไว้ใช้ในอนาคต</p>
+                            <p>เปรียบเสมือนการสะสมน้ำไว้ในแก้วทีละนิด เมื่อเวลาผ่านไปน้ำในแก้วก็จะเพิ่มมากขึ้นเรื่อยๆ</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 2: ประโยชน์ของการออม -->
+                <div class="slide" id="slide2">
+                    <div class="slide-content">
+                        <h2>ประโยชน์ของการออมทรัพย์</h2>
+                        <div class="media-container">
+                            <img src="/api/placeholder/600/350" alt="ประโยชน์ของการออม" class="lesson-image">
+                            <div class="audio-player">
+                                <button class="play-btn" data-audio="audio2"><i class="play-icon"></i> ฟังคำอธิบาย</button>
+                                <audio id="audio2" class="narration">
+                                    <source src="#" type="audio/mpeg">
+                                    เบราว์เซอร์ของคุณไม่รองรับการเล่นเสียง
+                                </audio>
+                            </div>
+                        </div>
+                        <div class="lesson-text">
+                            <h3>ประโยชน์ของการออมทรัพย์มีมากมาย เช่น:</h3>
+                            <ul class="benefit-list">
+                                <li>มีเงินไว้ใช้ยามฉุกเฉิน เช่น เจ็บป่วย หรือของใช้ชำรุด</li>
+                                <li>มีเงินไว้ซื้อสิ่งที่อยากได้โดยไม่ต้องขอเงินผู้ปกครองเพิ่ม</li>
+                                <li>ฝึกนิสัยการใช้เงินอย่างรู้คุณค่า</li>
+                                <li>เรียนรู้การวางแผนการใช้เงินและความอดทน</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 3: วิธีการออมในสหกรณ์โรงเรียน -->
+                <div class="slide" id="slide3">
+                    <div class="slide-content">
+                        <h2>วิธีการออมทรัพย์ในสหกรณ์นักเรียน</h2>
+                        <div class="media-container">
+                            <img src="/api/placeholder/600/350" alt="วิธีการออมในสหกรณ์" class="lesson-image">
+                            <div class="audio-player">
+                                <button class="play-btn" data-audio="audio3"><i class="play-icon"></i> ฟังคำอธิบาย</button>
+                                <audio id="audio3" class="narration">
+                                    <source src="#" type="audio/mpeg">
+                                    เบราว์เซอร์ของคุณไม่รองรับการเล่นเสียง
+                                </audio>
+                            </div>
+                        </div>
+                        <div class="lesson-text">
+                            <p>การออมทรัพย์ในสหกรณ์นักเรียนทำได้ง่ายๆ ตามขั้นตอนดังนี้</p>
+                            <ol class="steps-list">
+                                <li>สมัครเป็นสมาชิกสหกรณ์นักเรียน</li>
+                                <li>เปิดบัญชีเงินฝาก โดยมีสมุดบัญชีออมทรัพย์ของตนเอง</li>
+                                <li>นำเงินมาฝากกับเจ้าหน้าที่สหกรณ์ทุกวันตามที่โรงเรียนกำหนด</li>
+                                <li>เจ้าหน้าที่จะบันทึกยอดเงินลงในสมุดบัญชีให้</li>
+                                <li>เมื่อต้องการถอนเงิน ให้แจ้งกับครูที่ดูแลสหกรณ์</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 4: เกมทดลองฝากเงิน -->
+                <div class="slide" id="slide4">
+                    <div class="slide-content">
+                        <h2>มาลองฝากเงินกันเถอะ!</h2>
+                        <div class="saving-game">
+                            <div class="game-info">
+                                <p>น้องๆ ลองฝากเงินในกระปุกดูนะคะ แล้วดูว่าเงินจะเพิ่มขึ้นเท่าไหร่ในระยะเวลาต่างๆ</p>
+                            </div>
+                            <div class="game-container">
+                                <div class="piggy-bank">
+                                    <img src="/api/placeholder/200/200" alt="กระปุกออมสิน" class="piggy-img">
+                                    <div class="coin-slot"></div>
+                                </div>
+                                <div class="coins-area">
+                                    <div class="coin" data-value="1">1฿</div>
+                                    <div class="coin" data-value="5">5฿</div>
+                                    <div class="coin" data-value="10">10฿</div>
+                                </div>
+                                <div class="savings-display">
+                                    <p>เงินออมสะสม: <span id="totalSavings">0</span> บาท</p>
+                                    <p>ฝากมาแล้ว: <span id="daysCount">0</span> วัน</p>
+                                    <button id="nextDay" class="day-btn">ผ่านไป 1 วัน</button>
+                                </div>
+                            </div>
+                            <div class="savings-result" id="savingsResult">
+                                <p>ลองฝากเงินดูสิ!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 5: แบบทดสอบ -->
+                <div class="slide" id="slide5">
+                    <div class="slide-content">
+                        <h2>แบบทดสอบความเข้าใจ</h2>
+                        <div class="quiz-container">
+                            <div class="quiz-question">
+                                <p>1. การออมทรัพย์มีประโยชน์อย่างไร?</p>
+                                <div class="quiz-options">
+                                    <label class="option"><input type="radio" name="q1" value="a"> ก. ทำให้ไม่มีเงินใช้</label>
+                                    <label class="option"><input type="radio" name="q1" value="b"> ข. มีเงินไว้ใช้ยามฉุกเฉิน</label>
+                                    <label class="option"><input type="radio" name="q1" value="c"> ค. ทำให้เงินหาย</label>
+                                </div>
+                            </div>
+                            <div class="quiz-question">
+                                <p>2. สมาชิกสหกรณ์ออมทรัพย์ควรทำอย่างไร?</p>
+                                <div class="quiz-options">
+                                    <label class="option"><input type="radio" name="q2" value="a"> ก. ฝากเงินทุกวัน</label>
+                                    <label class="option"><input type="radio" name="q2" value="b"> ข. ฝากเงินเมื่อได้รับเงิน</label>
+                                    <label class="option"><input type="radio" name="q2" value="c"> ค. ไม่ต้องฝากเงินเลย</label>
+                                </div>
+                            </div>
+                            <button id="checkAnswers" class="check-btn">ตรวจคำตอบ</button>
+                            <div id="quizResult" class="quiz-result"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ส่วนสรุปและกิจกรรมเพิ่มเติม -->
+        <div class="additional-resources animated-element">
+            <h3>กิจกรรมเพิ่มเติม</h3>
+            <div class="resources-container">
+                <div class="resource-card">
+                    <img src="/api/placeholder/100/100" alt="กิจกรรมเพิ่มเติม" class="resource-img">
+                    <h4>สมุดบันทึกการออม</h4>
+                    <p>ดาวน์โหลดสมุดบันทึกการออมประจำวัน</p>
+                    <a href="#" class="resource-btn">ดาวน์โหลด</a>
+                </div>
+                <div class="resource-card">
+                    <img src="/api/placeholder/100/100" alt="กิจกรรมเพิ่มเติม" class="resource-img">
+                    <h4>เกมฝึกการออม</h4>
+                    <p>เล่นเกมฝึกทักษะการวางแผนการออม</p>
+                    <a href="#" class="resource-btn">เล่นเกม</a>
+                </div>
+                <div class="resource-card">
+                    <img src="/api/placeholder/100/100" alt="กิจกรรมเพิ่มเติม" class="resource-img">
+                    <h4>แบบฝึกหัด</h4>
+                    <p>ทำแบบฝึกหัดเพิ่มเติมเกี่ยวกับการออม</p>
+                    <a href="#" class="resource-btn">ทำแบบฝึกหัด</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation-buttons animated-element">
+            <a href="index.html" class="back-home-btn">
+                <i class="home-icon"></i> กลับหน้าหลัก
+            </a>
+            <a href="#" class="next-lesson-btn">
+                บทเรียนถัดไป <i class="arrow-right"></i>
+            </a>
+        </div>
+
+        <div class="floating-help-btn">❓</div>
+
+        <footer>
+            <p>บทเรียนคอมพิวเตอร์ช่วยสอนวิชาสหกรณ์ &copy; 2025</p>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script> <!-- JavaScript หลัก -->
+    <script src="js/saving.js"></script> <!-- JavaScript เฉพาะหน้า -->
+</body>
+</html>
