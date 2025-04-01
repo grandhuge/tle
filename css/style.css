@@ -9,6 +9,9 @@
 
         body {
             background-color: #f0f9ff;
+                    background-image: url("./img/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
             color: #333;
             overflow-x: hidden;
         }
