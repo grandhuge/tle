@@ -35,47 +35,37 @@
 		// ปุ่มปิดเสียงเพลงในไฟล์ main.js เพิ่มโค้ดนี้ในส่วน DOMContentLoaded
 
 // ควบคุมเสียง background
-const toggleSoundBtn = document.getElementById('toggleSound');
-const backgroundMusic = document.querySelector('audio');
-
-if (toggleSoundBtn && backgroundMusic) {
-    // ตรวจสอบสถานะเสียงเริ่มต้น
-    let isMuted = false;
+document.addEventListener('DOMContentLoaded', function() {
+    const audio = document.querySelector('audio');
+    const toggleSoundBtn = document.getElementById('toggleSound');
+    const soundIcon = toggleSoundBtn.querySelector('.sound-icon');
     
-    // ฟังก์ชันสลับปุ่มเสียง
+    // ตรวจสอบสถานะเสียงเริ่มต้น (เปิดอยู่)
+    let isSoundOn = true;
+    
+    // ฟังก์ชันสลับสถานะเสียง
     function toggleSound() {
-        isMuted = !isMuted;
-        backgroundMusic.muted = isMuted;
-        
-        if (isMuted) {
-            toggleSoundBtn.classList.add('muted');
-            toggleSoundBtn.innerHTML = '<i class="sound-icon">🔇</i>';
+        if (isSoundOn) {
+            audio.pause();
+            soundIcon.textContent = '🔇'; // ไอคอนปิดเสียง
+            isSoundOn = false;
         } else {
-            toggleSoundBtn.classList.remove('muted');
-            toggleSoundBtn.innerHTML = '<i class="sound-icon">🔊</i>';
+            audio.play();
+            soundIcon.textContent = '🔊'; // ไอคอนเปิดเสียง
+            isSoundOn = true;
         }
     }
     
-    // ตั้งค่าเริ่มต้นให้ปุ่ม
-    toggleSoundBtn.innerHTML = '<i class="sound-icon">🔊</i>';
-    
-    // การคลิกปุ่ม
+    // เพิ่ม Event Listener ให้ปุ่ม
     toggleSoundBtn.addEventListener('click', toggleSound);
     
-    // ปรับปรุง: บันทึกการตั้งค่าเสียงใน localStorage
-    function updateSoundSetting() {
-        localStorage.setItem('backgroundMusicMuted', isMuted);
-    }
-    
-    function loadSoundSetting() {
-        const savedSetting = localStorage.getItem('backgroundMusicMuted');
-        if (savedSetting === 'true') {
-            isMuted = true;
-            backgroundMusic.muted = true;
-            toggleSoundBtn.innerHTML = '<i class="sound-icon">🔇</i>';
-            toggleSoundBtn.classList.add('muted');
+    // พยายามเล่นเสียงอัตโนมัติเมื่อโหลดหน้า (เพื่อแก้ไขนโยบาย autoplay ของบราวเซอร์)
+    document.body.addEventListener('click', function() {
+        if (isSoundOn && audio.paused) {
+            audio.play().catch(e => console.log('ไม่สามารถเล่นเสียงอัตโนมัติ:', e));
         }
-    }
+    }, { once: true });
+});
     
     // โหลดการตั้งค่าเมื่อหน้าเว็บโหลด
     loadSoundSetting();
