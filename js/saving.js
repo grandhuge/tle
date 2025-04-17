@@ -201,3 +201,233 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize slide state
     updateSlide();
 });
+
+// ในส่วนของ Quiz functionality ให้แทนที่ด้วยโค้ดนี้:
+
+// Quiz Game functionality
+const quizQuestions = [
+    {
+        question: "การออมทรัพย์มีประโยชน์อย่างไร?",
+        options: [
+            { text: "ทำให้ไม่มีเงินใช้", correct: false },
+            { text: "มีเงินไว้ใช้ยามฉุกเฉิน", correct: true },
+            { text: "ทำให้เงินหาย", correct: false },
+            { text: "ทำให้เป็นหนี้", correct: false }
+        ],
+        explanation: "การออมทรัพย์ช่วยให้เรามีเงินสำรองไว้ใช้เมื่อจำเป็น เช่น เมื่อเจ็บป่วยหรือมีของใช้ชำรุด"
+    },
+    {
+        question: "สมาชิกสหกรณ์ออมทรัพย์ควรทำอย่างไร?",
+        options: [
+            { text: "ฝากเงินทุกวัน", correct: false },
+            { text: "ฝากเงินเมื่อได้รับเงิน", correct: true },
+            { text: "ไม่ต้องฝากเงินเลย", correct: false },
+            { text: "ฝากเงินเฉพาะวันเกิด", correct: false }
+        ],
+        explanation: "เราควรฝากเงินเมื่อมีเงินได้มา เช่น เมื่อได้รับเงินค่าขนมหรือเงินรางวัล เพื่อฝึกนิสัยการออม"
+    },
+    {
+        question: "ข้อใดคือประโยชน์ของการออมในสหกรณ์นักเรียน?",
+        options: [
+            { text: "ได้ดอกเบี้ยจากเงินออม", correct: true },
+            { text: "ได้เงินฟรีทุกเดือน", correct: false },
+            { text: "ไม่ต้องทำงาน", correct: false },
+            { text: "ได้ของเล่นฟรี", correct: false }
+        ],
+        explanation: "การออมในสหกรณ์นักเรียนทำให้เราได้ดอกเบี้ยจากเงินออม และยังได้เรียนรู้การบริหารเงิน"
+    },
+    {
+        question: "เมื่อต้องการถอนเงินจากสหกรณ์นักเรียนควรทำอย่างไร?",
+        options: [
+            { text: "แจ้งกับครูที่ดูแลสหกรณ์", correct: true },
+            { text: "เปิดตู้เซฟเอาเงินเอง", correct: false },
+            { text: "ขอยืมเงินจากเพื่อน", correct: false },
+            { text: "รอให้ครูให้เงิน", correct: false }
+        ],
+        explanation: "เมื่อต้องการถอนเงิน ควรแจ้งกับครูที่ดูแลสหกรณ์เพื่อบันทึกการถอนเงินในสมุดบัญชี"
+    },
+    {
+        question: "ข้อใดไม่ใช่วิธีการออมเงิน?",
+        options: [
+            { text: "นำเงินไปฝากธนาคาร", correct: false },
+            { text: "ใช้เงินทั้งหมดที่ได้รับ", correct: true },
+            { text: "เก็บเงินในกระปุกออมสิน", correct: false },
+            { text: "ฝากเงินกับสหกรณ์", correct: false }
+        ],
+        explanation: "การใช้เงินทั้งหมดที่ได้รับไม่ใช่วิธีการออมเงิน แต่เป็นการใช้เงินจนหมด"
+    }
+];
+
+function initQuizGame() {
+    const quizOptions = document.getElementById('quizOptions');
+    const questionText = document.getElementById('questionText');
+    const feedbackContainer = document.getElementById('feedbackContainer');
+    const nextQuestionBtn = document.getElementById('nextQuestionBtn');
+    const gameScore = document.getElementById('gameScore');
+    const gameLives = document.getElementById('gameLives');
+    const quizProgress = document.getElementById('quizProgress');
+    const currentQuestion = document.getElementById('currentQuestion');
+    const gameResult = document.getElementById('gameResult');
+    
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let lives = 3;
+    let selectedOption = null;
+    
+    // Load first question
+    loadQuestion(currentQuestionIndex);
+    
+    function loadQuestion(index) {
+        if (index >= quizQuestions.length) {
+            endGame();
+            return;
+        }
+        
+        const question = quizQuestions[index];
+        questionText.textContent = question.question;
+        quizOptions.innerHTML = '';
+        
+        // Shuffle options
+        const shuffledOptions = [...question.options].sort(() => Math.random() - 0.5);
+        
+        shuffledOptions.forEach((option, i) => {
+            const optionElement = document.createElement('div');
+            optionElement.className = 'quiz-option';
+            optionElement.textContent = `${String.fromCharCode(65 + i)}. ${option.text}`;
+            optionElement.dataset.correct = option.correct;
+            optionElement.addEventListener('click', selectOption);
+            quizOptions.appendChild(optionElement);
+        });
+        
+        // Update progress
+        currentQuestion.textContent = index + 1;
+        quizProgress.style.width = `${((index + 1) / quizQuestions.length) * 100}%`;
+        
+        // Reset UI for new question
+        feedbackContainer.innerHTML = '';
+        feedbackContainer.className = 'feedback-container';
+        nextQuestionBtn.style.display = 'none';
+        selectedOption = null;
+    }
+    
+    function selectOption(e) {
+        if (selectedOption) return; // Prevent changing answer
+        
+        const selected = e.target;
+        selectedOption = selected;
+        
+        // Highlight selected option
+        selected.classList.add('selected');
+        
+        // Check if correct
+        const isCorrect = selected.dataset.correct === 'true';
+        
+        // Disable all options
+        document.querySelectorAll('.quiz-option').forEach(opt => {
+            opt.style.pointerEvents = 'none';
+            if (opt.dataset.correct === 'true') {
+                opt.classList.add('correct');
+            } else if (opt === selected && !isCorrect) {
+                opt.classList.add('incorrect');
+            }
+        });
+        
+        // Show feedback
+        const question = quizQuestions[currentQuestionIndex];
+        const feedback = document.createElement('div');
+        
+        if (isCorrect) {
+            feedbackContainer.className = 'feedback-container feedback-correct';
+            feedback.innerHTML = `<p>ถูกต้อง! 🎉 ${question.explanation}</p>`;
+            score += 10;
+            gameScore.textContent = score;
+            
+            // Add coin animation
+            const coin = document.createElement('span');
+            coin.className = 'coin-reward';
+            coin.textContent = '💰';
+            feedback.appendChild(coin);
+        } else {
+            feedbackContainer.className = 'feedback-container feedback-incorrect';
+            feedback.innerHTML = `<p>ยังไม่ถูกต้อง 😢 ${question.explanation}</p>`;
+            lives--;
+            gameLives.textContent = '❤️'.repeat(lives);
+        }
+        
+        feedbackContainer.appendChild(feedback);
+        nextQuestionBtn.style.display = 'block';
+        
+        // Check if game over
+        if (lives <= 0) {
+            setTimeout(endGame, 1500);
+        }
+    }
+    
+    nextQuestionBtn.addEventListener('click', () => {
+        currentQuestionIndex++;
+        loadQuestion(currentQuestionIndex);
+    });
+    
+    function endGame() {
+        quizOptions.innerHTML = '';
+        questionText.style.display = 'none';
+        nextQuestionBtn.style.display = 'none';
+        feedbackContainer.style.display = 'none';
+        
+        gameResult.style.display = 'block';
+        
+        if (lives > 0) {
+            // Player won
+            const percentage = Math.round((score / (quizQuestions.length * 10)) * 100);
+            gameResult.className = 'game-result game-success';
+            gameResult.innerHTML = `
+                <h3>ยินดีด้วย! 🎉</h3>
+                <p>คุณตอบถูก ${score / 10} จาก ${quizQuestions.length} คำถาม</p>
+                <p>ได้คะแนน ${percentage}%</p>
+                <p>คุณได้รับเงินออม ${score} บาท!</p>
+                <div class="celebration">🎊🥳🎊</div>
+                <button id="playAgainBtn" class="next-question-btn">เล่นอีกครั้ง</button>
+            `;
+        } else {
+            // Player lost
+            gameResult.className = 'game-result game-failure';
+            gameResult.innerHTML = `
+                <h3>เกมจบแล้ว! 😢</h3>
+                <p>คุณตอบถูก ${score / 10} จาก ${quizQuestions.length} คำถาม</p>
+                <p>ได้คะแนน ${Math.round((score / (quizQuestions.length * 10)) * 100)}%</p>
+                <p>คุณได้รับเงินออม ${score} บาท</p>
+                <p>ลองใหม่อีกครั้งนะ!</p>
+                <button id="playAgainBtn" class="next-question-btn">เล่นอีกครั้ง</button>
+            `;
+        }
+        
+        document.getElementById('playAgainBtn').addEventListener('click', resetGame);
+    }
+    
+    function resetGame() {
+        currentQuestionIndex = 0;
+        score = 0;
+        lives = 3;
+        
+        gameScore.textContent = score;
+        gameLives.textContent = '❤️❤️❤️';
+        questionText.style.display = 'block';
+        feedbackContainer.style.display = 'block';
+        feedbackContainer.style.display = 'flex';
+        gameResult.style.display = 'none';
+        
+        loadQuestion(currentQuestionIndex);
+    }
+}
+
+// Initialize quiz game when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // ... โค้ดเดิม ...
+    
+    // Initialize quiz game
+    if (document.getElementById('quizOptions')) {
+        initQuizGame();
+    }
+    
+    // ... โค้ดเดิม ...
+});

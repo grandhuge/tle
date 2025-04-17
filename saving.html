@@ -170,32 +170,51 @@
                     </div>
                 </div>
 
-                <!-- สไลด์ที่ 6: แบบทดสอบ -->
-                <div class="slide" id="slide6">
-                    <div class="slide-content">
-                        <h2>แบบทดสอบความเข้าใจ</h2>
-                        <div class="quiz-container">
-                            <div class="quiz-question">
-                                <p>1. การออมทรัพย์มีประโยชน์อย่างไร?</p>
-                                <div class="quiz-options">
-                                    <label class="option"><input type="radio" name="q1" value="a"> ก. ทำให้ไม่มีเงินใช้</label>
-                                    <label class="option"><input type="radio" name="q1" value="b"> ข. มีเงินไว้ใช้ยามฉุกเฉิน</label>
-                                    <label class="option"><input type="radio" name="q1" value="c"> ค. ทำให้เงินหาย</label>
-                                </div>
-                            </div>
-                            <div class="quiz-question">
-                                <p>2. สมาชิกสหกรณ์ออมทรัพย์ควรทำอย่างไร?</p>
-                                <div class="quiz-options">
-                                    <label class="option"><input type="radio" name="q2" value="a"> ก. ฝากเงินทุกวัน</label>
-                                    <label class="option"><input type="radio" name="q2" value="b"> ข. ฝากเงินเมื่อได้รับเงิน</label>
-                                    <label class="option"><input type="radio" name="q2" value="c"> ค. ไม่ต้องฝากเงินเลย</label>
-                                </div>
-                            </div>
-                            <button id="checkAnswers" class="check-btn">ตรวจคำตอบ</button>
-                            <div id="quizResult" class="quiz-result"></div>
-                        </div>
-                    </div>
+                <!-- สไลด์ที่ 6: แบบทดสอบรูปแบบเกม -->
+<div class="slide" id="slide6">
+    <div class="slide-content">
+        <h2>เกมทดสอบความรู้การออมทรัพย์</h2>
+        <div class="quiz-game-container">
+            <div class="game-header">
+                <div class="score-display">
+                    <span>เงินออมสะสม: </span>
+                    <span id="gameScore">0</span>
+                    <span> บาท</span>
                 </div>
+                <div class="lives-display">
+                    <span>โอกาสเหลือ: </span>
+                    <span id="gameLives">❤️❤️❤️</span>
+                </div>
+            </div>
+            
+            <div class="quiz-progress">
+                <div class="progress-bar" id="quizProgress"></div>
+                <div class="progress-text">คำถามที่ <span id="currentQuestion">1</span>/5</div>
+            </div>
+            
+            <div class="quiz-question-container">
+                <div class="question-text" id="questionText">
+                    กำลังโหลดคำถาม...
+                </div>
+                <div class="quiz-options" id="quizOptions">
+                    <!-- ตัวเลือกจะถูกเพิ่มโดย JavaScript -->
+                </div>
+            </div>
+            
+            <div class="feedback-container" id="feedbackContainer">
+                <!-- ผลตอบรับจะแสดงที่นี่ -->
+            </div>
+            
+            <div class="game-result" id="gameResult">
+                <!-- ผลลัพธ์เกมจะแสดงที่นี่เมื่อจบเกม -->
+            </div>
+            
+            <button id="nextQuestionBtn" class="next-question-btn" style="display: none;">
+                คำถามต่อไป <i class="arrow-right"></i>
+            </button>
+        </div>
+    </div>
+</div>
             </div>
         </div>
 
