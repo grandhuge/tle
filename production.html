@@ -10,14 +10,16 @@
         <div style="width: 60px; height: 60px; border-radius: 50%; border: 6px solid #ccc; border-top-color: #007bff; animation: spin 1.5s linear infinite; margin: 0 auto 25px;"></div>
         <h1 style="color: #333; font-size: 2.2em; margin-bottom: 15px;">กำลังปรับปรุง</h1>
         <p style="color: #555; font-size: 1.1em; line-height: 1.6;">เว็บไซต์ของเรากำลังอยู่ในระหว่างการปรับปรุงเพื่อให้คุณได้รับประสบการณ์ที่ดียิ่งขึ้น</p>
-        <p style="color: #777; font-size: 0.95em; margin-top: 20px;">จะกลับมาเปิดให้บริการอีกครั้งในวันที่ 1 มกราคม พ.ศ. 2569</p>
+        <p style="color: #777; font-size: 0.95em; margin-top: 20px;">จะกลับมาเปิดให้บริการอีกครั้งในวันที่ 30 กันยายน พ.ศ. 2569</p>
         <div id="countdown" style="color: #007bff; font-size: 1.2em; margin-top: 25px; font-weight: bold;"></div>
         <button onclick="goBack()" style="background-color: #007bff; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 1em; border-radius: 5px; cursor: pointer; margin-top: 30px;">ย้อนกลับ</button>
     </div>
 
     <script>
         function updateCountdown() {
-            const maintenanceEndTime = new Date(2026, 0, 1, 0, 0, 0); // 1 มกราคม 2026
+            // กำหนดวันที่และเวลาสิ้นสุดการบำรุงรักษา (30 กันยายน พ.ศ. 2569 เวลา 00:00:00)
+            // โปรดทราบ: เดือนใน JavaScript เริ่มต้นที่ 0 (มกราคม = 0, ..., กันยายน = 8, ...)
+            const maintenanceEndTime = new Date(2569 - 543, 8, 30, 0, 0, 0); // ปี ค.ศ. 2026, เดือนกันยายน (8), วันที่ 30
 
             const now = new Date().getTime();
             const timeLeft = maintenanceEndTime.getTime() - now;
